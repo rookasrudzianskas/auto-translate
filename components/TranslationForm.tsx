@@ -39,6 +39,16 @@ const TranslationForm = ({ languages }: { languages: TranslationLanguages }) => 
     }
   }, [state]);
 
+   useEffect(() => {
+    if (!input?.trim()) return;
+
+    const delayDebounceFn = setTimeout(() => {
+      submitBtnRef.current?.click();
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [input]);
+
   return (
     <>
       <div className="flex space-x-2">
