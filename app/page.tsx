@@ -33,7 +33,7 @@ export default async function Home() {
         </Link>
       ) : (
         <Button className="bg-blue-500 hover:bg-blue-600 w-full mt-10 lg:w-fit p-5">
-          <SignInButton afterSignInUrl={url} mode="modal">
+          <SignInButton afterSignInUrl={'/'} mode="modal">
             Sign In to Get Translating
           </SignInButton>
         </Button>
