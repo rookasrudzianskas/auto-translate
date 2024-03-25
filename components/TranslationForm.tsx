@@ -164,7 +164,7 @@ const TranslationForm = ({ languages }: { languages: TranslationLanguages }) => 
               <Button
                 variant="ghost"
                 type="button"
-                // onClick={playAudio}
+                onClick={playAudio}
                 disabled={!output}
               >
                 <Volume2Icon
