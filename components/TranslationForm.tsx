@@ -33,6 +33,12 @@ const TranslationForm = ({ languages }: { languages: TranslationLanguages }) => 
   const [output, setOutput] = useState("");
   const submitBtnRef = useRef<HTMLButtonElement>(null);
 
+  useEffect(() => {
+    if (state.output) {
+      setOutput(state.output);
+    }
+  }, [state]);
+
   return (
     <>
       <div className="flex space-x-2">
