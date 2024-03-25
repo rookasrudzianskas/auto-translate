@@ -18,6 +18,7 @@ import Image from "next/image";
 import { MicIcon, SpeakerIcon, Volume2Icon } from "lucide-react";
 import { Button } from "./ui/button";
 import SubmitButton from "@/components/SubmitButton";
+import Recorder from "@/components/Recorder";
 
 const initialState = {
   inputLanguage: "auto",
@@ -50,6 +51,27 @@ const TranslationForm = ({ languages }: { languages: TranslationLanguages }) => 
     return () => clearTimeout(delayDebounceFn);
   }, [input]);
 
+  const uploadAudio = async (blob: Blob) => {
+    const mimeType = "audio/webm";
+
+    const file = new File([blob], "audio.webm", { type: mimeType });
+
+    const formData = new FormData();
+    formData.append("audio", file);
+
+    const response = await fetch("/transcribeAudio", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (data.text) {
+      setInput(data.text);
+    }
+  };
+
+
   const playAudio = async () => {
     const synth = window.speechSynthesis;
 
@@ -77,7 +99,7 @@ const TranslationForm = ({ languages }: { languages: TranslationLanguages }) => 
           </p>
         </div>
 
-        {/*<Recorder uploadAudio={uploadAudio} />*/}
+        <Recorder uploadAudio={uploadAudio} />
       </div>
 
       <form action={formAction}>
