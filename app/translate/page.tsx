@@ -33,7 +33,7 @@ const TranslatePage = async ({}) => {
   return (
     <div className="px-10 xl:px-0 mb-20">
       <TranslationForm languages={languages}/>
-      {/*<TranslationHistory/>*/}
+      <TranslationHistory/>
     </div>
   );
 };

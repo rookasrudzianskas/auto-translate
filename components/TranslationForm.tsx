@@ -17,6 +17,7 @@ import {
 import Image from "next/image";
 import { MicIcon, SpeakerIcon, Volume2Icon } from "lucide-react";
 import { Button } from "./ui/button";
+import SubmitButton from "@/components/SubmitButton";
 
 const initialState = {
   inputLanguage: "auto",
@@ -48,6 +49,16 @@ const TranslationForm = ({ languages }: { languages: TranslationLanguages }) => 
 
     return () => clearTimeout(delayDebounceFn);
   }, [input]);
+
+  const playAudio = async () => {
+    const synth = window.speechSynthesis;
+
+    if (!output || !synth) return;
+
+    const wordsToSay = new SpeechSynthesisUtterance(output);
+
+    synth.speak(wordsToSay);
+  };
 
   return (
     <>
@@ -154,7 +165,7 @@ const TranslationForm = ({ languages }: { languages: TranslationLanguages }) => 
         </div>
 
         <div className="mt-5 flex justify-end">
-          {/*<SubmitButton disabled={!input} />*/}
+          <SubmitButton disabled={!input} />
           <button type="submit" hidden ref={submitBtnRef} />
         </div>
       </form>
